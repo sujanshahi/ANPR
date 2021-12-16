@@ -14,6 +14,9 @@
     @yield('third_party_stylesheets')
 
     @stack('page_css')
+
+
+  
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -23,30 +26,49 @@
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i>&nbsp;{{ config('app.name') }}</a>
             </li>
         </ul>
-
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src="https://infyom.com/images/logo/blue_logo_150x150.jpg"
+            <li class="btn btn-light nav-item">
+            <a href="#"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+            </li>
+        </ul>
+    </nav>
+
+        <!-- <div class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                <a href="#" class=""
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Sign out
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form> -->
+                    <!-- <img src="user8-128x128.jpg"
                          class="user-image img-circle elevation-2" alt="User Image">
-                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> -->
+                <!-- </a> -->
+                <!-- <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right"> -->
                     <!-- User image -->
-                    <li class="user-header bg-primary">
-                        <img src="https://infyom.com/images/logo/blue_logo_150x150.jpg"
+                    <!-- <li class="user-header bg-primary">
+                        <img src="user8-128x128.jpg"
                              class="img-circle elevation-2"
                              alt="User Image">
                         <p>
                             {{ Auth::user()->name }}
                             <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
                         </p>
-                    </li>
+                    </li> -->
                     <!-- Menu Footer-->
-                    <li class="user-footer">
+                    <!-- <li class="user-footer">
                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                         <a href="#" class="btn btn-default btn-flat float-right"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -55,11 +77,10 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+                    </li> -->
+                <!-- </ul> -->
+            <!-- </li> -->
+        <!-- </div> -->
 
     <!-- Left side column. contains the logo and sidebar -->
 @include('layouts.sidebar')
@@ -74,9 +95,9 @@
     <!-- Main Footer -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.0.5
+            Made with ♥ in Nepal.<b>Version</b> 1.0.1
         </div>
-        <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+        <strong>Copyright &copy; 2021-2022 <a href="https://anpr.com">ANPR | Project Chariot</a>.</strong> All rights
         reserved.
     </footer>
 </div>
@@ -86,5 +107,7 @@
 @yield('third_party_scripts')
 
 @stack('page_scripts')
+        
+
 </body>
 </html>
