@@ -24,6 +24,8 @@ Route::get('/camera', [App\Http\Controllers\CameraController::class, 'cam'])->na
 Route::get('/analytic', [App\Http\Controllers\AnalyticController::class, 'stat'])->name('analytic');
 Route::get('/setting', [App\Http\Controllers\SettingController::class, 'setting'])->name('setting');
 
+Route::resource('plates', PlateController::class);
+
 
 
 

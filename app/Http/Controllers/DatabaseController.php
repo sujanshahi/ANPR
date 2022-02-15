@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Plate;
+
 
 class DatabaseController extends Controller
 {
@@ -23,6 +25,10 @@ class DatabaseController extends Controller
      */
     public function db()
     {
-        return view('database');
+        $plates = Plate::latest()->paginate(8);
+
+        return view('database', compact('plates'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+        // return view('database');
     }
 }

@@ -17,7 +17,7 @@
       </div><!-- /.container-fluid -->
     </section>
     <div class="row pt-1">
-        <div class="col-md-6">
+        <div class="col-md-6 text-center">
             <div id="container">
                 <video autoplay="true" id="videoElement" controls>
                 
@@ -30,7 +30,7 @@
                     <!-- small card -->
                     <div class="small-box bg-warning bg-info">
                         <div class="inner">
-                            <h3>1500</h3>
+                            <h3>{{ $count = \DB::table('plates')->count(); }}</h3>
 
                             <p>Cars</p>
                         </div>
@@ -47,7 +47,7 @@
                     <!-- small card -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>{{ $count = \DB::table('plates')->AVG('id'); }}<sup style="font-size: 20px">%</sup></h3>
 
                             <p>New Bike</p>
                         </div>
@@ -66,7 +66,7 @@
                     <!-- small card -->
                     <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>444</h3>
+                        <h3>{{ $count = \DB::table('plates')->count(); }}</h3>
 
                         <p>Total Plates Today</p>
                     </div>
@@ -83,8 +83,8 @@
                     <!-- small card -->
                     <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
-
+                        
+                        <h3>{{ $count = \DB::table('plates')->distinct('type')->count('type'); }}</h3>
                         <p>Unique Plates</p>
                     </div>
                     <div class="icon">
@@ -119,7 +119,8 @@
                     </div>
                     <div class="card-body">
                         <div class="chart">
-                            <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            <canvas id="myAreaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -147,7 +148,7 @@
                     </div>
                     <div class="card-body">
                         <div class="chart">
-                            <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            <canvas id="myBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                         </div>
                     </div>
                 <!-- /.card-body -->
@@ -183,80 +184,39 @@
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
-                  <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Plate Number</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Plate Image</th>
+                </tr>
+                @foreach ($plates as $plate)
                     <tr>
-                      <th>ID</th>
-                      <th>Plate Number</th>
-                      <th>Type</th>
-                      <th>Date</th>
-                      <th>TimeStamp</th>
-                      <th>Image</th>
+                        <td>{{ $plate->id }}</td>
+                        <td>{{ $plate->plate_number }}</td>
+                        <td>{{ $plate->type }}</td>
+                        <td>{{ $plate->created_at }}</td>
+                        <td>{{ $plate->updated_at }}</td>
+                        <!-- <td>{{ $plate->plate_image }}</td> -->
+                        <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($plate->plate_image)) }}" width="100px;"> <i class="fas fa-ellipsis-v float-right mt-1 text-dark"></i></td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>180</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>181</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>182</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>183</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>184</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                  </tbody>
+                @endforeach
                 </table>
               </div>
               <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-            <div class="card-tools float-right">
-                <ul class="pagination pagination-sm float-right">
-                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
             </div>
           </div>
             
         </div>
         
-        <!-- /.row -->
-        <style>
+        <div class="row d-felx justify-content ml-auto">
+
+            {{ $plates->links() }}
+
+        </div>
+<style>
             
     #videoElement {
         border-radius:1.1rem;
@@ -281,10 +241,10 @@
         background-image: linear-gradient(295deg, #fff95b 0%, #ff930f 100%);
     }
     .small-box {
-            border-radius: 1.1rem;
+            border-radius: 0.9rem;
     }
     .small-box-footer {
-            border-radius: 1.1rem;
+            border-radius: 0.9rem;
     }
 </style>
  
@@ -302,4 +262,16 @@
         });
     }   
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var _ydata=JSON.parse('{!! json_encode($months) !!}');
+    var _xdata=JSON.parse('{!! json_encode($monthCount) !!}');
+</script>
+<!-- <script src="{{asset('public')}}/assets/demo/chart-area-demo.js"></script>
+<script src="{{asset('public')}}/assets/demo/chart-bar-demo.js"></script> -->
+<script src="{{ ('js/chart-area-demo.js') }}"></script>
+<script src="{{ ('js/bar-area-demo.js') }}"></script>
+
+
+
 @endsection

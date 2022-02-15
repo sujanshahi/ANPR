@@ -24,7 +24,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">3000 Records</h3>
+                <h3 class="card-title">{{ $count = \DB::table('plates')->count(); }} Records</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -40,91 +40,37 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
+              <table class="table table-hover text-nowrap">
+                <tr>
+                    <th>No</th>
+                    <th>Plate Number</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Plate Image</th>
+                </tr>
+                @foreach ($plates as $plate)
                     <tr>
-                      <th>ID</th>
-                      <th>Plate Number</th>
-                      <th>Type</th>
-                      <th>Date</th>
-                      <th>TimeStamp</th>
-                      <th>Image</th>
+                        <td>{{ $plate->id }}</td>
+                        <td>{{ $plate->plate_number }}</td>
+                        <td>{{ $plate->type }}</td>
+                        <td>{{ $plate->created_at }}</td>
+                        <td>{{ $plate->updated_at }}</td>
+                        <!-- <td>{{ $plate->plate_image }}</td> -->
+                        <td><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($plate->plate_image)) }}" width="100px;"> <i class="fas fa-ellipsis-v float-right mt-1 text-dark"></i></td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>180</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>181</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>182</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>183</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>184</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>185</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                    <tr>
-                    <td>186</td>
-                      <td>Ba3Kha1717</td>
-                      <td>Commercial</td>
-                      <td>11-8-2021</td>
-                      <td>11:00:34</td>
-                      <td><img src=""><i class="fas fa-ellipsis-v float-right mt-1 text-secondary"></i></td>
-                    </tr>
-                  </tbody>
+                @endforeach
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
+            <div class="row d-felx justify-content ml-auto">
+
+            {{ $plates->links() }}
+
+        </div>
             <!-- /.card -->
-            <div class="card-tools float-right">
-                <ul class="pagination pagination-sm float-right">
-                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
-            </div>
+            
           </div>
             
         </div>

@@ -30,9 +30,9 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="btn btn-light nav-item">
+            <li class="nav-item">
             <a href="#"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary px-4">
                 Logout
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

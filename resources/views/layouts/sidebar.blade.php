@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-light-primary elevation-4">
+<aside class="main-sidebar sidebar-light-primary">
     <!-- <a href="{{ route('home') }}" class="brand-link">
         <img src="user8-128x128.jpg"
              alt=""
